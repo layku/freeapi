@@ -1,0 +1,36 @@
+#dev 开发环境
+#pro 生产环境
+spring:
+  mail:
+    host: smtp.qq.com
+    username: ENC(R45ZAGbsSvM/4r/KjrKDlF3tao+GGx+x)
+    password: ENC(hhazBvWMjBGS/eqR9HRi7kwdJEievZ3nfLUoO5CZ0bU=)
+    properties:
+      mail:
+        smtp:
+          auth: true
+          starttls:
+            enable: true
+            required: true
+#system
+server:
+  port: 9999
+  tomcat:
+    basedir: /data/layku/temp/
+  servlet:
+    session:
+      timeout: 18000
+
+#aliyun mail
+aliyun:
+  region-id: ENC(XtGuAx60pQUweNZIYWfECtCwejou32oC)
+  access-key-id: ENC(60FHGnrKgBW2vbSjiUKpPomOSBi1qWcG48aI5AmM9/U=)
+  secret: ENC(vy3x4J+JlxtZskajsllRnSZ7GgjHmEIVxIxdB9MckUEPmJf3adrLeg==)
+  mail:
+    account-name: ENC(4Ztd/VBXvZoxaOsx3dWFrAwDFGH/HDt/)
+    from-alias: ENC(7Hg297W7fuXtwwkcB+Nyj/dh7rFGkoFP3aILarr5ubY=)
+
+#修改
+jasypt:
+  encryptor:
+    password: xxx

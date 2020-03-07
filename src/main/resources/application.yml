@@ -1,0 +1,21 @@
+#dev 开发环境
+#pro 生产环境
+spring:
+  thymeleaf:
+    mode: HTML5
+    encoding: UTF-8
+    cache: false
+  profiles:
+    active: dev
+
+#system
+server:
+  tomcat:
+    basedir: /data/layku/temp/
+  servlet:
+    session:
+      timeout: 18000
+
+#logback
+logging:
+  config: classpath:config/logback-spring.xml

@@ -1,0 +1,52 @@
+#dev 开发环境
+#pro 生产环境
+#阿里邮箱
+#spring:
+#  mail:
+#    host: smtpdm.aliyun.com
+#    username: fund@layku.cn
+#    password: fsYl2HGJ5d6B3
+#    properties:
+#      mail:
+#        smtp:
+#          auth: true
+#          starttls:
+#            enable: true
+#            required: true
+
+#QQ邮箱
+spring:
+  mail:
+    host: smtp.qq.com
+    username: ENC(PUmGIr24r0SPAYjnUJxduk4CuUYeNdxNatLOhO0dBGs=)
+    password: ENC(5F8ZHm9E+nVLjTx6VTkFC9k8QG1sQei07zl/c+1tRxQ=)
+    default-encoding: utf-8
+    properties:
+      mail:
+        smtp:
+          auth: true
+          starttls:
+            enable: true
+            required: true
+#system
+server:
+  port: 8888
+  tomcat:
+    basedir: /data/layku/temp/
+  servlet:
+    session:
+      timeout: 18000
+
+#aliyun mail
+aliyun:
+  region-id: ENC(0kiREhAd5WNdXWhYyuRuM40dlPE7Z2ZA)
+  access-key-id: ENC(gYWDoFyiyCNqy8M5hs45NLSmq4h305qolGx6zzwYYfY=)
+  secret: ENC(6MDG7c9lu34AIxToz1jb71+kHc9nRZXeObX6y0QXdT2BU0/Ur155yA==)
+  mail:
+    account-name: ENC(3U9PRiCGw/etHHV/8RMk2hgOg5UADxr4)
+    from-alias: ENC(TUo9dONsdLlxFXCrI2KsfF//XT52ColZhmgk5rtDiT8=)
+
+#修改
+jasypt:
+  encryptor:
+    password: xxx
