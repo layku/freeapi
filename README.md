@@ -19,3 +19,4 @@ nohup java -jar -Dspring.profiles.active=prod -Djasypt.encryptor.password=自己
 2. 
 
 #### 本地启动参数配置
+![image](https://github.com/layku/freeapi/blob/master/readmeImg/configParam.png)
