@@ -40,11 +40,17 @@ server:
 #aliyun mail
 aliyun:
   region-id: ENC(0kiREhAd5WNdXWhYyuRuM40dlPE7Z2ZA)
-  access-key-id: ENC(gYWDoFyiyCNqy8M5hs45NLSmq4h305qolGx6zzwYYfY=)
-  secret: ENC(6MDG7c9lu34AIxToz1jb71+kHc9nRZXeObX6y0QXdT2BU0/Ur155yA==)
+  access-key-id: ENC(RBLIDVRzrFTzA0ly6dz9hMneRf5e6ZMrGjyvQB9go0RyQzCpYbVLWQ==)
+  secret: ENC(l/WsFlbRs8WoSjQfLKNlvT2+b2yrIQi+TIz1Ll54XoJqbjUGBLT+IQ==)
   mail:
     account-name: ENC(3U9PRiCGw/etHHV/8RMk2hgOg5UADxr4)
     from-alias: ENC(TUo9dONsdLlxFXCrI2KsfF//XT52ColZhmgk5rtDiT8=)
+
+#baidu ip
+baidu:
+  ip:
+    ak: ENC(o3JjaE4H2sJxSgd2/+4ZojptCOTztFltdoqN2U343EG/P5s8Z1f759SZWTF8F17i)
+    sk: ENC(vA/3BpkX4RgLXtTlcGMDaCteuff+XNSVfpx8HccB4vMRFfmxl4IU1NpQe73Qiywp)
 
 #修改
 jasypt:

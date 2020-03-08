@@ -1,14 +1,19 @@
 package cn.layku.freeapi;
 
+import cn.layku.freeapi.service.ip.IpService;
 import cn.layku.freeapi.service.mail.MailService;
+import com.alibaba.fastjson.JSON;
 import org.jasypt.encryption.StringEncryptor;
 import org.junit.Test;
 import org.junit.runner.RunWith;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
 import javax.annotation.Resource;
+import java.util.Map;
 
 /**
  * @packageName: cn.layku.freeapi
@@ -21,6 +26,8 @@ import javax.annotation.Resource;
 @SpringBootTest(classes = App.class)
 public class TestApp {
 
+    private static Logger logger = LoggerFactory.getLogger(TestApp.class);
+
     @Autowired
     private StringEncryptor stringEncryptor;
 
@@ -29,7 +36,6 @@ public class TestApp {
         //加密
         String a = stringEncryptor.encrypt("123456");
         System.out.println(a);
-
     }
 
     @Resource(name = "aliMail")
@@ -40,4 +46,42 @@ public class TestApp {
         //测试发送邮件
         mailService.sendTextMail("dong.it@qq.com", "测试邮件", "测试文本邮件");
     }
+
+
+    @Resource(name = "pcOnlineIp")
+    IpService ipService;
+
+    @Test
+    public void ipToAddrTest() throws Exception {
+        String[] ips = new String[]{
+                "61.132.163.68",
+                "219.141.136.10",
+                "61.128.192.68",
+                "218.85.152.99",
+                "202.100.64.68",
+                "202.96.128.86",
+                "202.103.225.68",
+                "202.98.192.67",
+                "222.88.88.88",
+                "219.147.198.230",
+                "202.103.24.68",
+                "222.246.129.80",
+                "218.2.2.2",
+                "202.101.224.69",
+                "219.146.1.66",
+                "218.30.19.40",
+                "202.96.209.5",
+                "61.139.2.69",
+                "219.150.32.132",
+                "222.172.200.68"
+        };
+
+        for (String ip : ips) {
+            Map<String, Object> ipAddr = ipService.getIpAddr(ip);
+            System.out.println(JSON.toJSONString(ipAddr));
+        }
+
+
+    }
+
 }
