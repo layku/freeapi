@@ -2,6 +2,7 @@ package cn.layku.freeapi;
 
 import cn.layku.freeapi.service.ip.IpService;
 import cn.layku.freeapi.service.mail.MailService;
+import cn.layku.freeapi.service.weekday.WeekdayService;
 import com.alibaba.fastjson.JSON;
 import org.jasypt.encryption.StringEncryptor;
 import org.junit.Test;
@@ -81,7 +82,17 @@ public class TestApp {
             System.out.println(JSON.toJSONString(ipAddr));
         }
 
+    }
 
+
+    @Resource(name = "weekday")
+    WeekdayService weekdayService;
+
+    @Test
+    public void weekdayTest() {
+        String a = "2020-01-02";
+        boolean holiday = weekdayService.isHoliday(a);
+        System.out.println(holiday);
     }
 
 }
