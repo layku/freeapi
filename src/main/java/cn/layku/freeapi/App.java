@@ -29,6 +29,7 @@ public class App implements CommandLineRunner {
     @Value("${server.port}")
     private String port;
 
+
     @Override
     public void run(String... strings) {
         logger.info("项目启动完成,当前环境->{},当前端口->{}", active, port);
