@@ -83,6 +83,14 @@
             <version>2.1.2</version>
         </dependency>
 
+        <!-- HTML解析工具-jsoup -->
+        <dependency>
+            <groupId>org.jsoup</groupId>
+            <artifactId>jsoup</artifactId>
+            <version>1.13.1</version>
+        </dependency>
+
+
 
         <!--测试-->
         <dependency>

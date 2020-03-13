@@ -2,9 +2,13 @@ package cn.layku.freeapi;
 
 import cn.layku.freeapi.service.ip.IpService;
 import cn.layku.freeapi.service.mail.MailService;
+import cn.layku.freeapi.service.spider.SpiderService;
 import cn.layku.freeapi.service.weekday.WeekdayService;
 import com.alibaba.fastjson.JSON;
 import org.jasypt.encryption.StringEncryptor;
+import org.jsoup.nodes.Document;
+import org.jsoup.nodes.Element;
+import org.jsoup.select.Elements;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.slf4j.Logger;
@@ -90,9 +94,19 @@ public class TestApp {
 
     @Test
     public void weekdayTest() {
-        String a = "2020-01-02";
+        String a = "2018-02-15";
         boolean holiday = weekdayService.isHoliday(a);
         System.out.println(holiday);
+    }
+
+    @Resource(name = "addressSpider")
+    SpiderService spiderService;
+
+    @Test
+    public void addressSpiderTest() {
+        Object data = spiderService.getData();
+        System.out.println(JSON.toJSONString(data));
+
     }
 
 }
