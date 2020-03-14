@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="cn.layku.freeapi.dao.AreaDao">
+
+    <insert id="insertBatch" parameterType="map">
+        insert into t_area(code,name,level,url,parent_code,view_sort)
+        values
+        <foreach collection="list" item="item" index="index" separator=",">
+            (#{item.code},#{item.name},#{item.level},#{item.url},#{item.parentCode},#{item.viewSort})
+        </foreach>
+    </insert>
+
+</mapper>

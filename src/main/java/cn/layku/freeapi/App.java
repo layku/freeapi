@@ -1,5 +1,6 @@
 package cn.layku.freeapi;
 
+import org.mybatis.spring.annotation.MapperScan;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Value;
@@ -15,6 +16,7 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
  * @dateTime: 2020/03/07 10:40
  */
 @SpringBootApplication
+@MapperScan({"cn.layku.freeapi.dao"})
 public class App implements CommandLineRunner {
 
     private static Logger logger = LoggerFactory.getLogger(App.class);

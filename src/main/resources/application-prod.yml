@@ -1,6 +1,7 @@
 #dev 开发环境
 #pro 生产环境
 spring:
+  #QQ Mail
   mail:
     host: smtp.qq.com
     username: ENC(R45ZAGbsSvM/4r/KjrKDlF3tao+GGx+x)
@@ -12,6 +13,11 @@ spring:
           starttls:
             enable: true
             required: true
+  datasource:
+    url: jdbc:mysql://localhost:3306/test?characterEncoding=utf8&allowMultiQueries=true&useSSL=false&autoReconnect=true&serverTimezone=UTC
+    username: ENC(CXNYmX5jeqr8HZXRSHtkmA==)
+    password: ENC(uhpQOJLZDeJ/EvrQzpnfdA==)
+    driver-class-name: com.mysql.cj.jdbc.Driver
 #system
 server:
   port: 9999

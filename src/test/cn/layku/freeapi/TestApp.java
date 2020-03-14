@@ -39,8 +39,11 @@ public class TestApp {
     @Test
     public void jasyptTest() {
         //加密
-        String a = stringEncryptor.encrypt("123456");
-        System.out.println(a);
+        String a1 = stringEncryptor.encrypt("123456");
+        System.out.println(a1);
+
+        String a2 = stringEncryptor.encrypt("654321");
+        System.out.println(a2);
     }
 
     @Resource(name = "aliMail")
@@ -106,7 +109,6 @@ public class TestApp {
     public void addressSpiderTest() {
         Object data = spiderService.getData();
         System.out.println(JSON.toJSONString(data));
-
     }
 
 }

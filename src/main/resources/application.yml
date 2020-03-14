@@ -19,3 +19,7 @@ server:
 #logback
 logging:
   config: classpath:config/logback-spring.xml
+
+#mybatis
+mybatis:
+  mapper-locations: classpath:mapper/*.xml
