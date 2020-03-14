@@ -43,28 +43,32 @@ public class AddressSpiderServiceImpl implements SpiderService {
                 continue;
             }
             String provinceCode = MapUtils.getString(provinceMap, "code");
-            List<Map<String, Object>> cityList = getCitys(provinceUrl, provinceCode);
+            String provinceAddress = MapUtils.getString(provinceMap, "address");
+            List<Map<String, Object>> cityList = getCitys(provinceUrl, provinceCode, provinceAddress);
             for (Map<String, Object> cityMap : cityList) {
                 String cityUrl = MapUtils.getString(cityMap, "url");
                 if (cityUrl == null) {
                     continue;
                 }
                 String cityCode = MapUtils.getString(cityMap, "code");
-                List<Map<String, Object>> countyList = getCountys(cityUrl, cityCode);
+                String cityAddress = MapUtils.getString(cityMap, "address");
+                List<Map<String, Object>> countyList = getCountys(cityUrl, cityCode, cityAddress);
                 for (Map<String, Object> countyMap : countyList) {
                     String countyUrl = MapUtils.getString(countyMap, "url");
                     if (countyUrl == null) {
                         continue;
                     }
                     String countyCode = MapUtils.getString(countyMap, "code");
-                    List<Map<String, Object>> townList = getTowns(countyUrl, countyCode);
+                    String countyAddress = MapUtils.getString(countyMap, "address");
+                    List<Map<String, Object>> townList = getTowns(countyUrl, countyCode, countyAddress);
                     for (Map<String, Object> townMap : townList) {
                         String townUrl = MapUtils.getString(townMap, "url");
                         if (townUrl == null) {
                             continue;
                         }
                         String townCode = MapUtils.getString(townMap, "code");
-                        List<Map<String, Object>> villageList = getVillages(townUrl, townCode);
+                        String townAddress = MapUtils.getString(townMap, "address");
+                        List<Map<String, Object>> villageList = getVillages(townUrl, townCode, townAddress);
                         townMap.put("child", villageList);
                     }
                     countyMap.put("child", townList);
@@ -86,7 +90,7 @@ public class AddressSpiderServiceImpl implements SpiderService {
         //http://www.stats.gov.cn/tjsj/tjbz/tjyqhdmhcxhfdm/2019/
         List<Map<String, Object>> dataList = new ArrayList<>();
         try {
-            Document doc = Jsoup.connect(url).timeout(60000).get();
+            Document doc = Jsoup.connect(url).timeout(1000).get();
             Elements elements = doc.select("table.provincetable>tbody>tr.provincetr>td>a");
             int index = 1;
             for (Element element : elements) {
@@ -98,6 +102,7 @@ public class AddressSpiderServiceImpl implements SpiderService {
                 dataMap.put("name", text);
                 dataMap.put("url", url + path);
                 dataMap.put("parentCode", "0");
+                dataMap.put("address", text);
                 dataMap.put("level", 1);
                 dataMap.put("viewSort", index++);
                 dataList.add(dataMap);
@@ -118,13 +123,14 @@ public class AddressSpiderServiceImpl implements SpiderService {
      *
      * @param url
      * @param parentCode
+     * @param parentAddress
      * @return
      */
-    private List<Map<String, Object>> getCitys(String url, String parentCode) {
+    private List<Map<String, Object>> getCitys(String url, String parentCode, String parentAddress) {
         //http://www.stats.gov.cn/tjsj/tjbz/tjyqhdmhcxhfdm/2019/42.html
         List<Map<String, Object>> dataList = new ArrayList<>();
         try {
-            Document doc = Jsoup.connect(url).timeout(60000).get();
+            Document doc = Jsoup.connect(url).timeout(1000).get();
             Elements trElements = doc.select("table.citytable>tbody>tr.citytr");
             int index = 1;
             for (Element element : trElements) {
@@ -140,13 +146,14 @@ public class AddressSpiderServiceImpl implements SpiderService {
                 dataMap.put("name", text);
                 dataMap.put("url", url.substring(0, url.lastIndexOf("/") + 1) + path);
                 dataMap.put("parentCode", parentCode);
+                dataMap.put("address", parentAddress + " " + text);
                 dataMap.put("level", 2);
                 dataMap.put("viewSort", index++);
                 dataList.add(dataMap);
             }
         } catch (Exception e) {
             System.err.println("超时->" + url);
-            getCitys(url, parentCode);
+            getCitys(url, parentCode, parentAddress);
         }
         if (!dataList.isEmpty()) {
             dao.insertBatch(dataList);
@@ -159,13 +166,14 @@ public class AddressSpiderServiceImpl implements SpiderService {
      *
      * @param url
      * @param parentCode
+     * @param parentAddress
      * @return
      */
-    private List<Map<String, Object>> getCountys(String url, String parentCode) {
+    private List<Map<String, Object>> getCountys(String url, String parentCode, String parentAddress) {
         //http://www.stats.gov.cn/tjsj/tjbz/tjyqhdmhcxhfdm/2019/42/4203.html
         List<Map<String, Object>> dataList = new ArrayList<>();
         try {
-            Document doc = Jsoup.connect(url).timeout(60000).get();
+            Document doc = Jsoup.connect(url).timeout(1000).get();
             Elements trElements = doc.select("table.countytable>tbody>tr.countytr");
             int index = 1;
             for (Element element : trElements) {
@@ -185,13 +193,14 @@ public class AddressSpiderServiceImpl implements SpiderService {
                     dataMap.put("url", url.substring(0, url.lastIndexOf("/") + 1) + path);
                 }
                 dataMap.put("parentCode", parentCode);
+                dataMap.put("address", parentAddress + " " + text);
                 dataMap.put("level", 3);
                 dataMap.put("viewSort", index++);
                 dataList.add(dataMap);
             }
         } catch (Exception e) {
             System.err.println("超时->" + url);
-            getCountys(url, parentCode);
+            getCountys(url, parentCode, parentAddress);
         }
         if (!dataList.isEmpty()) {
             dao.insertBatch(dataList);
@@ -204,13 +213,14 @@ public class AddressSpiderServiceImpl implements SpiderService {
      *
      * @param url
      * @param parentCode
+     * @param parentAddress
      * @return
      */
-    private List<Map<String, Object>> getTowns(String url, String parentCode) {
+    private List<Map<String, Object>> getTowns(String url, String parentCode, String parentAddress) {
         //http://www.stats.gov.cn/tjsj/tjbz/tjyqhdmhcxhfdm/2019/42/01/420105.html
         List<Map<String, Object>> dataList = new ArrayList<>();
         try {
-            Document doc = Jsoup.connect(url).timeout(60000).get();
+            Document doc = Jsoup.connect(url).timeout(1000).get();
             Elements trElements = doc.select("table.towntable>tbody>tr.towntr");
             int index = 1;
             for (Element element : trElements) {
@@ -230,13 +240,14 @@ public class AddressSpiderServiceImpl implements SpiderService {
                     dataMap.put("url", url.substring(0, url.lastIndexOf("/") + 1) + path);
                 }
                 dataMap.put("parentCode", parentCode);
+                dataMap.put("address", parentAddress + " " + text);
                 dataMap.put("level", 4);
                 dataMap.put("viewSort", index++);
                 dataList.add(dataMap);
             }
         } catch (Exception e) {
             System.err.println("超时->" + url);
-            getTowns(url, parentCode);
+            getTowns(url, parentCode, parentAddress);
         }
         if (!dataList.isEmpty()) {
             dao.insertBatch(dataList);
@@ -249,13 +260,14 @@ public class AddressSpiderServiceImpl implements SpiderService {
      *
      * @param url
      * @param parentCode
+     * @param parentAddress
      * @return
      */
-    private List<Map<String, Object>> getVillages(String url, String parentCode) {
+    private List<Map<String, Object>> getVillages(String url, String parentCode, String parentAddress) {
         //http://www.stats.gov.cn/tjsj/tjbz/tjyqhdmhcxhfdm/2019/42/01/05/420105007.html
         List<Map<String, Object>> dataList = new ArrayList<>();
         try {
-            Document doc = Jsoup.connect(url).timeout(60000).get();
+            Document doc = Jsoup.connect(url).timeout(1000).get();
             Elements trElements = doc.select("table.villagetable>tbody>tr.villagetr");
             int index = 1;
             for (Element element : trElements) {
@@ -266,13 +278,14 @@ public class AddressSpiderServiceImpl implements SpiderService {
                 dataMap.put("code", code);
                 dataMap.put("name", text);
                 dataMap.put("parentCode", parentCode);
+                dataMap.put("address", parentAddress + " " + text);
                 dataMap.put("level", 5);
                 dataMap.put("viewSort", index++);
                 dataList.add(dataMap);
             }
         } catch (Exception e) {
             System.err.println("超时->" + url);
-            getVillages(url, parentCode);
+            getVillages(url, parentCode, parentAddress);
         }
         if (!dataList.isEmpty()) {
             dao.insertBatch(dataList);

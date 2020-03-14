@@ -3,10 +3,10 @@
 <mapper namespace="cn.layku.freeapi.dao.AreaDao">
 
     <insert id="insertBatch" parameterType="map">
-        insert into t_area(code,name,level,url,parent_code,view_sort)
+        insert into t_area(code,name,level,url,parent_code,address,view_sort)
         values
         <foreach collection="list" item="item" index="index" separator=",">
-            (#{item.code},#{item.name},#{item.level},#{item.url},#{item.parentCode},#{item.viewSort})
+            (#{item.code},#{item.name},#{item.level},#{item.url},#{item.parentCode},#{item.address},#{item.viewSort})
         </foreach>
     </insert>
 
