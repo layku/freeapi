@@ -106,7 +106,7 @@ public class TestApp {
     SpiderService spiderService;
 
     @Test
-    public void addressSpiderTest() {
+    public void spiderTest() {
         Object data = spiderService.getData();
         System.out.println(JSON.toJSONString(data));
     }
