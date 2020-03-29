@@ -20,4 +20,19 @@ public interface AreaDao {
      */
     int insertBatch(List<Map<String, Object>> list);
 
+    /**
+     * 添加行政区域
+     *
+     * @param map
+     * @return
+     */
+    int insert(Map<String, Object> map);
+
+    /**
+     * 获取所有行政区域
+     *
+     * @return
+     */
+    List<Map<String, Object>> list();
+
 }

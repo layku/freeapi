@@ -10,4 +10,19 @@
         </foreach>
     </insert>
 
+    <insert id="insert" parameterType="map">
+        insert into t_adm_area(code,name)
+        values(#{code},#{name}) on duplicate key update name = #{name}
+    </insert>
+
+    <select id="list" resultType="map">
+        select
+        t.code,
+        t.name,
+        t.level,
+        t.parent_code parentCode,
+        t.addr
+        from t_adm_area t;
+    </select>
+
 </mapper>

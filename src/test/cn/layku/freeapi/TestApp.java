@@ -6,9 +6,6 @@ import cn.layku.freeapi.service.spider.SpiderService;
 import cn.layku.freeapi.service.weekday.WeekdayService;
 import com.alibaba.fastjson.JSON;
 import org.jasypt.encryption.StringEncryptor;
-import org.jsoup.nodes.Document;
-import org.jsoup.nodes.Element;
-import org.jsoup.select.Elements;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.slf4j.Logger;
@@ -102,7 +99,7 @@ public class TestApp {
         System.out.println(holiday);
     }
 
-    @Resource(name = "addressSpider")
+    @Resource(name = "admSpider")
     SpiderService spiderService;
 
     @Test
